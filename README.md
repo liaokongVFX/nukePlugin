@@ -6,4 +6,4 @@
 放入用户文件夹下的.nuke目录下即可
 
 eg：
-C:\Users\Liaokong\.nuke\
+C:\Users\Liaokong\\.nuke\
