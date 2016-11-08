@@ -1,15 +1,10 @@
 # -*- coding:utf-8 -*-
-"""
+
 ###################
 #
 # Nuke文件打包插件
 #
-# 所有文件中所用的素材都会被拷贝到输出路径下的Sources中，打包出来的文件中的素材路径会被修改成当前文件夹的相对路径
-#
-# 注意:素材路径和输出路径有中文和空格会无法打包 素材路径格式需要使用%d格式 不能使用#格式
-#
 ###################
-"""
 
 # 导入精确除法
 from __future__ import division
@@ -123,6 +118,7 @@ def collectFiles(inScriptName, outDir, doNodes):
     progTask = nuke.ProgressTask("Collecting...")
 
     for n in doNodes:
+
         fullPath = n['file'].getValue()
         splitPath = fullPath.split("/")
         # mediaPath 获取read节点上素材的文件夹
@@ -131,6 +127,9 @@ def collectFiles(inScriptName, outDir, doNodes):
         daMedia = splitPath[-1]
         # fExt 获取素材拓展名
         fExt = daMedia.split(".")[-1]
+
+        # 素材路径
+        dir_path = fullPath.replace(daMedia, "")
 
         # print mediaPath,daMedia,fExt
 
@@ -148,9 +147,19 @@ def collectFiles(inScriptName, outDir, doNodes):
             startFrame = int(n["first"].getValue())
             endFrame = int(n["last"].getValue())
             # 获取序列名称
-            seqName = daMedia.split(".")[0]
+
+            # TODO: 判断素材名称情况
+            file_name_list = daMedia.split(".")
+            if len(file_name_list) == 3:
+                seqName = daMedia.split(".")[0]
+                seqLen = daMedia.split(".")[-2]
+            elif len(file_name_list) == 2:
+                seqName = daMedia.split("%")[0][:-1]
+                seqLen_temp = daMedia.split("%")[1].split(".")[0]
+                seqLen = "%" + seqLen_temp
+
             seqNameDot = daMedia[:daMedia.find("%")]
-            seqLen = daMedia.split(".")[-2]
+
             os.chdir(outDir + "Sources")
             if not os.path.exists(seqName):
                 os.mkdir(seqName)
@@ -186,9 +195,28 @@ def collectFiles(inScriptName, outDir, doNodes):
                 sys.stdout.write(
                     line.replace(fullPath, '\"\\[file dirname \\[value root.name]]/' + 'Sources/' + daMedia + '\"'))
 
+    # TODO: 处理文件中#路径
+    lines = open(NewScriptName, "r").readlines()
+    lines_len = len(lines) - 1
+    re_write = False
+    for i in range(lines_len):
+        if not lines[i].find("#") == -1:
+            sucai_name = lines[i][5:].split("/")[-1][:-1]
+            sucai_folder = lines[i][5:].split("/")[-2]
+            sucai_full = " " + '\"\\[file dirname \\[value root.name]]/' + 'Sources/' + sucai_folder + '/' + sucai_name + '\"'+"\n"
+            lines[i] = lines[i].replace(lines[i][5:], sucai_full)
+            re_write = True
+
+    if re_write == True:
+        open(NewScriptName, 'w').writelines(lines)
+
 
 def mainFunc():
     collenctData = collectFilesPanel()
 
     if collenctData != None:
         collectFiles(collenctData[0], collenctData[1], collenctData[2])
+
+
+        # TODO:修复中文路径
+        # 需要把read节点上获取的路径使用unicode()函数转化下
