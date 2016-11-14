@@ -39,3 +39,4 @@ def auto_append_clip():
     y_pos = all_nodes_list[0][1]['ypos'].getValue()
     ac.setXpos(int((max_pos - min_pos) / 2 + min_pos))
     ac.setYpos(int(y_pos + 500.0))
+
