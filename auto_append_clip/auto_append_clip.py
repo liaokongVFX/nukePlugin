@@ -21,7 +21,7 @@ def auto_append_clip():
         all_nodes_list.append((read_num, i))
 
     # 列表排序
-    all_nodes_list.sort(cmp=lambda x, y: cmp(x[0], y[0]))
+    all_nodes_list.sort(key=lambda x: x[0])
 
     for k in range(0, len(all_nodes_list)):
         try:
