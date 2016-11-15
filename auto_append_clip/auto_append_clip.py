@@ -9,7 +9,11 @@ def auto_append_clip():
     for i in all_nodes:
         read_path = i["file"].getValue()
         if len(read_path.split(".")) == 2:
-            read_num = read_path.split(".")[0].split("_")[-2]
+            if read_path.split(".")[0].find("-") != -1:
+                read_num = read_path.split(".")[0].split("-")[-1].split("_")[0]
+            else:
+                read_num = read_path.split(".")[0].split("_")[-2]
+
         elif len(read_path.split(".")) == 3:
             if read_path.split(".")[0].find("-") != -1:
                 read_num = read_path.split(".")[0].split("-")[-1]
@@ -39,4 +43,3 @@ def auto_append_clip():
     y_pos = all_nodes_list[0][1]['ypos'].getValue()
     ac.setXpos(int((max_pos - min_pos) / 2 + min_pos))
     ac.setYpos(int(y_pos + 500.0))
-
