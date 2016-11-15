@@ -48,15 +48,28 @@ def correctReadPath():
                             readNode["origfirst"].setValue(int(firstFrame))
                             readNode["origlast"].setValue(int(endFrame))
 
-
                         else:
-                            for stillFile in fileName:
-                                if stillFile != "Thumbs.db":
-                                    readFileName = stillFile.split(".")[0]
-                                    houzhui = stillFile.split(".")[1]
-                                    readNode = nuke.createNode("Read", inpanel=False)
-                                    fileFullPath = os.path.join(rootName, stillFile)
-                                    readNode["file"].setValue(fileFullPath.replace("\\", "/"))
+                            if fileName[0].split(".")[-1] == "dpx":
+                                readFileName = fileName[0].split(".")[0][:-len(fileName[0].split(".")[0].split("_")[-1])]
+                                padd = len(fileName[-1].split(".")[0].split("_")[-1])
+                                houzhui = fileName[0].split(".")[1]
+                                firstFrame = fileName[0].split(".")[0].split("_")[-1]
+                                endFrame = fileName[-1].split(".")[0].split("_")[-1]
+
+                                readNode = nuke.createNode("Read", inpanel=False)
+                                fileFullPath = rootName + "/" + readFileName + "%0{}d.".format(padd) + houzhui
+                                readNode["file"].setValue(fileFullPath.replace("\\", "/"))
+                                readNode["first"].setValue(int(firstFrame))
+                                readNode["last"].setValue(int(endFrame))
+                                readNode["origfirst"].setValue(int(firstFrame))
+                                readNode["origlast"].setValue(int(endFrame))
+
+                            else:
+                                for stillFile in fileName:
+                                    if stillFile != "Thumbs.db":
+                                        readNode = nuke.createNode("Read", inpanel=False)
+                                        fileFullPath = os.path.join(rootName, stillFile)
+                                        readNode["file"].setValue(fileFullPath.replace("\\", "/"))
 
         for delNode in selNodes:
             nuke.delete(delNode)
