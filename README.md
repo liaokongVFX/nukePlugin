@@ -1,6 +1,3 @@
-[batch_render](#batch_render)
-
-
 # nukePlugin
 自己写的一些nuke小插件
 
@@ -13,6 +10,18 @@ C:\Users\Liaokong\\.nuke\
 
 
 ## 使用方法：
+
+[correct Read Path](#correctReadPath)
+
+[delete Update](#deleteUpdate)
+
+[file Collector](#fileCollector)
+
+[auto_append_clip](#auto_append_clip)
+
+[batch render](#batch_render)
+
+##
 
 ### correctReadPath
 修正多层嵌套的素材无法正确导入的问题
