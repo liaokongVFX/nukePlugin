@@ -17,7 +17,7 @@ C:\Users\Liaokong\\.nuke\
 
 [file Collector](#fileCollector)
 
-[auto_append_clip](#auto_append_clip)
+[auto append clip](#auto_append_clip)
 
 [batch render](#batch_render)
 
