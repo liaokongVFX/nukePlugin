@@ -79,7 +79,7 @@ ps：
 比如 有4集的镜头需要渲染，每集有50个镜头需要压水印并且输出成mov，就可以每导入一集所有的镜头，执行以下batch render命令，这样，4集就会生成4个bat文件，然后就可以同时执行这4个bat文件，就可以同时渲染这4集的所有镜头了。
 nuke输出时没有大量计算型节点时，cpu占有率是很低的，所以同时使用bat调用多个nuke进程来渲染也不会太影响每个镜头渲染的速度。
 
-####autoBackup
+###autoBackup
 当保存工程文件时，会自动保存一个工程文件备份到非C盘外第一个盘的nuke_backups目录下（默认是D:/nuke_backups，但有时有的人没有d盘，有e盘，那么就会保存到e盘的nuke_backups目录下）
 
 可以点击nuke菜单栏中"Liaokong/open backup dir"打开备份文件列表根目录。
