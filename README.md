@@ -84,6 +84,8 @@ nuke输出时没有大量计算型节点时，cpu占有率是很低的，所以�
 
 可以点击nuke菜单栏中"Liaokong/open backup dir"打开备份文件列表根目录。
 
+备份文件列表根目录下只保留最近的五个备份文件，如需修改请修改autoBackup/autoBackup.py中的number_of_backups的值。
+
 备份文件列表目录结构：
 
 |
