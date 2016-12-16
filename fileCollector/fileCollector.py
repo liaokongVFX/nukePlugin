@@ -9,13 +9,14 @@
 # 导入精确除法
 from __future__ import division
 
-import nuke
-import nukescripts
-import os
-import shutil
-
-import sys
 import fileinput
+import nuke
+import os
+import sys
+
+import nukescripts
+
+import shutil
 
 reload(sys)
 sys.setdefaultencoding("utf-8")
@@ -36,7 +37,7 @@ def collectFilesPanel():
 	result = cp.show()
 
 	if result == 1:
-		outDir = cp.value("输出路径:") + "/"
+		outDir = cp.value("输出路径:")
 		inScriptName = cp.value("输出文件名:")
 		allOrSel = cp.value("输出节点方式:")
 
@@ -151,10 +152,10 @@ def collectFiles(inScriptName, outDir, doNodes):
 			# 判断素材名称情况
 			file_name_list = daMedia.split(".")
 			if len(file_name_list) == 3:
-				seqName = daMedia.split(".")[0]
+				seqName = seqFolder.split("/")[-2]
 				seqLen = daMedia.split(".")[-2]
 			elif len(file_name_list) == 2:
-				seqName = daMedia.split("%")[0][:-1]
+				seqName = seqFolder.split("/")[-2]
 				seqLen_temp = daMedia.split("%")[1].split(".")[0]
 				seqLen = "%" + seqLen_temp
 
@@ -165,31 +166,31 @@ def collectFiles(inScriptName, outDir, doNodes):
 				os.mkdir(seqName)
 
 			os.chdir(seqName)
-			for f in range(startFrame, endFrame + 1):
+			full_file_name = os.listdir(seqFolder)
+			copy_num = 1
+			for name in full_file_name:
 
 				if progTask.isCancelled():
 					nuke.message("素材将不能全部导出")
 					break
 
 				# 进度条显示设置
-				percent = int((f / endFrame) * 100)
+				percent = int((copy_num / len(full_file_name)) * 100)
 
 				progTask.setProgress(percent)
 
 				# zfill(宽度)设置字符串宽度 不够的用0补齐
+
 				# curFile = seqFolder + seqNameDot + str(f).zfill(padd) + "." + fExt
 				# copyFile = seqNameDot + str(f).zfill(padd) + "." + fExt
-				# shutil.copyfile(curFile, copyFile)
-				#
-				# progTask.setMessage("Copying:" + seqNameDot + str(f).zfill(padd) + "." + fExt)
 
 				# 这里选用了文件夹遍历的方式获取文件名称，因为文件夹内的文件可能是隔几帧的序列素材
-				full_file_name = os.listdir(seqFolder)
-				for name in full_file_name:
-					curFile = seqFolder + name
-					shutil.copyfile(curFile, name)
 
-					progTask.setMessage("Copying:" + seqNameDot + str(f).zfill(padd) + "." + fExt)
+				curFile = seqFolder + name
+				shutil.copyfile(curFile, name)
+
+				progTask.setMessage("Copying: " + curFile.split("/")[-1])
+				copy_num += 1
 
 			for i, line in enumerate(fileinput.input(NewScriptName, inplace=1)):
 				sys.stdout.write(line.replace(fullPath,
