@@ -11,23 +11,23 @@ C:\Users\Liaokong\\.nuke\
 
 ## 使用方法：
 
-[correct Read Path](#correctReadPath)
+[correct Read Path](#correct_read_path)
 
-[delete Update](#deleteUpdate)
+[delete Update](#delete_update)
 
-[file Collector](#fileCollector)
+[file Collector](#file_collector)
 
 [auto append clip](#auto_append_clip)
 
 [batch render](#batch_render)
 
-[autoBackup](#autoBackup)
+[autoBackup](#auto_backup)
 
-[writeToRead](#writeToRead)
+[writeToRead](#write_to_read)
 
 ##
 
-### correctReadPath
+### correct_read_path
 修正多层嵌套的素材无法正确导入的问题
 
 使用方法：
@@ -38,11 +38,11 @@ C:\Users\Liaokong\\.nuke\
 
 3.点击correct Read Path(Ctrl+Shift+Z)
 
-### deleteUpdate
+### delete_update
 
 用来删除Local File Cache命令的创建的缓存
 
-### fileCollector
+### file_collector
 nuke工程项目打包，所有文件中所用的素材都会被拷贝到Sources下，打包出来的文件中的素材路径会被修改成当前文件夹的相对路径。
 
 最新版支持了包含“文件名.%04d”、“文件名_%04d”、“文件名_####”、“文件名.####”格式的路径素材的打包。
@@ -81,7 +81,7 @@ ps：
 比如 有4集的镜头需要渲染，每集有50个镜头需要压水印并且输出成mov，就可以每导入一集所有的镜头，执行以下batch render命令，这样，4集就会生成4个bat文件，然后就可以同时执行这4个bat文件，就可以同时渲染这4集的所有镜头了。
 nuke输出时没有大量计算型节点时，cpu占有率是很低的，所以同时使用bat调用多个nuke进程来渲染也不会太影响每个镜头渲染的速度。
 
-###autoBackup
+###auto_backup
 当保存工程文件时，会自动保存一个工程文件备份到非C盘外第一个盘的nuke_backups目录下（默认是D:/nuke_backups，但有时有的人没有d盘，有e盘，那么就会保存到e盘的nuke_backups目录下）
 
 可以点击nuke菜单栏中"Liaokong/open backup dir"打开备份文件列表根目录。
@@ -101,5 +101,5 @@ nuke输出时没有大量计算型节点时，cpu占有率是很低的，所以�
                 
 如有需要，请根据自身情况修改。
 
-###writeToRead
+###write_to_read
 选择Write节点，然后执行write To Read命令（快捷键：shift+r）即可导入该Write节点渲染输出的素材。
