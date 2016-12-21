@@ -103,3 +103,13 @@ nuke输出时没有大量计算型节点时，cpu占有率是很低的，所以�
 
 ###write_to_read
 选择Write节点，然后执行write To Read命令（快捷键：shift+r）即可导入该Write节点渲染输出的素材。
+
+```
+gantt
+dateFormat YYY-MM-DD
+title 测试
+section 初期
+需求: 2016-03-01, 10d
+section 中期
+开发: 2016-03-11, 15d
+```
