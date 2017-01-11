@@ -36,7 +36,7 @@ def my_makedirs_panel():
 
 def my_makedirs(filename):
 	"""
-	创建文件夹并拷贝文件
+	创建文件夹并拷贝文件（同时删除原始文件）
 	"""
 	os.makedirs(filename.split(".")[0])
 	shutil.copyfile(filename, os.path.join(filename.split(".")[0], filename.split("/")[-1]))
