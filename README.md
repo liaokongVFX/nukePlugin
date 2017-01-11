@@ -25,6 +25,8 @@ C:\Users\Liaokong\\.nuke\
 
 [writeToRead](#write_to_read)
 
+[make Everyone File Dir](#make_everyone_file_dir)
+
 ##
 
 ### correct_read_path
@@ -103,3 +105,6 @@ nuke输出时没有大量计算型节点时，cpu占有率是很低的，所以�
 
 ###write_to_read
 选择Write节点，然后执行write To Read命令（快捷键：shift+r）即可导入该Write节点渲染输出的素材。
+
+###make_everyone_file_dir
+可以给选中的文件夹中的每一个文件创建一个文件夹，并把文件拷贝进对应的文件夹中
