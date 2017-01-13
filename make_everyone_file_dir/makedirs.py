@@ -51,9 +51,7 @@ def do_makedirs(dirpath):
 	file_list = [os.path.join(dirpath, f) for f in os.listdir(dirpath)]
 	for filename in file_list:
 		if filename != dirpath + "Thumbs.db":
-			p = threading.Thread(target=my_makedirs, args=(filename,))
-			p.setDaemon(True)
-			p.start()
+			my_makedirs(filename)
 
 		elif filename == dirpath + "Thumbs.db":
 			try:
