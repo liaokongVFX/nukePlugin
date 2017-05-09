@@ -9,5 +9,5 @@ import sys
 reload(sys)
 sys.setdefaultencoding("utf-8")
 
-nuke.menu("Nuke").addMenu(u"小工具").addCommand(u"项目表格生成工具", "movToExcel.start()")
+nuke.menu("Nuke").addCommand(u"Liaokong/项目表格生成工具", "movToExcel.start()")
 
